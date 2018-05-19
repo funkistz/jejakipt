@@ -1,0 +1,235 @@
+<!--
+  Generated template for the InfoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Info</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div padding class="secondary-color">
+    <ion-segment [(ngModel)]="segment">
+      <ion-segment-button value="info">
+        Info
+      </ion-segment-button>
+      <ion-segment-button value="program">
+        Program
+      </ion-segment-button>
+      <ion-segment-button value="news">
+        News
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div [ngSwitch]="segment" class="segment">
+
+    <div *ngSwitchCase="'info'">
+
+        <ion-avatar *ngIf="university.image">
+            <img [src]="getInstituteImage(university.image)">
+        </ion-avatar>
+
+      <ion-card class="card-pink">
+        <ion-card-header>
+          <strong>{{ university.name }}</strong><br>
+          <span *ngIf="university.level">{{ getInstituteLevel(university.level) }}</span><br>
+          <span>{{ getInstituteType(university.type) }}</span>
+        </ion-card-header>
+        <ion-card-content>
+              Phone no: {{ university.faks }}<br>
+              Faks no: {{ university.phone }}<br>
+              Website: <a [href]="university.website">{{ university.website }}</a>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="card-pink">
+        <ion-card-header>
+          <strong>Address</strong>
+        </ion-card-header>
+        <ion-card-content>
+          {{ university.address }}<br>
+          {{ university.postcode }}<br>
+          {{ university.city }}<br>
+          {{ university.state_name }}<br><br>
+          {{ university.lat }} - {{ university.lng }}<br><br>
+          Distance: {{ distance }} km<br>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-grid>
+        <ion-row padding-horizontal>
+          <button ion-button icon-left color="primary" block (click)="openMap()">
+            <ion-icon name="navigate"></ion-icon>
+            Navigate
+          </button>
+        </ion-row>
+      </ion-grid>
+
+
+    </div>
+
+    <div *ngSwitchCase="'program'">
+
+      <div padding class="secondary-color">
+        <ion-segment [(ngModel)]="segmentProgram">
+          <ion-segment-button value="diploma" *ngIf="groupedProgram.get('d')">
+            Diploma
+          </ion-segment-button>
+          <ion-segment-button value="degree" *ngIf="groupedProgram.get('b')">
+            Degree
+          </ion-segment-button>
+          <ion-segment-button value="master" *ngIf="groupedProgram.get('m')">
+            Master
+          </ion-segment-button>
+          <ion-segment-button value="phd" *ngIf="groupedProgram.get('p')">
+            PHD
+          </ion-segment-button>
+          <ion-segment-button value="foundation" *ngIf="groupedProgram.get('f')">
+            Foundation
+          </ion-segment-button>
+          <ion-segment-button value="sijil" *ngIf="groupedProgram.get('s')">
+            Sijil
+          </ion-segment-button>
+        </ion-segment>
+      </div>
+
+      <div [ngSwitch]="segmentProgram" class="segment">
+
+        <div *ngSwitchCase="'diploma'">
+          <ion-list>
+            <ion-item *ngFor="let program of groupedProgram.get('d')">
+              <h2 *ngIf="program.faculty">Faculty: {{ program.faculty.name }}</h2>
+              <h2 *ngIf="program.program">Program: {{ program.program.name }}</h2>
+              <h3 *ngIf="program.major">Major: {{ program.major }}</h3>
+              <p *ngIf="program.duration">Duration: {{ program.duration }}</p>
+              <p *ngIf="program.cost">Cost: RM{{ program.cost }}</p>
+            </ion-item>
+          </ion-list>
+        </div>
+
+        <div *ngSwitchCase="'degree'">
+          <ion-list>
+            <ion-item *ngFor="let program of groupedProgram.get('b')">
+              <h2 *ngIf="program.faculty">Faculty: {{ program.faculty.name }}</h2>
+              <h2 *ngIf="program.program">Program: {{ program.program.name }}</h2>
+              <h3 *ngIf="program.major">Major: {{ program.major }}</h3>
+              <p *ngIf="program.duration">Duration: {{ program.duration }}</p>
+              <p *ngIf="program.cost">Cost: RM{{ program.cost }}</p>
+            </ion-item>
+          </ion-list>
+        </div>
+
+        <div *ngSwitchCase="'master'">
+          <ion-list>
+            <ion-item *ngFor="let program of groupedProgram.get('m')">
+              <h2 *ngIf="program.faculty">Faculty: {{ program.faculty.name }}</h2>
+              <h2 *ngIf="program.program">Program: {{ program.program.name }}</h2>
+              <h3 *ngIf="program.major">Major: {{ program.major }}</h3>
+              <p *ngIf="program.duration">Duration: {{ program.duration }}</p>
+              <p *ngIf="program.cost">Cost: RM{{ program.cost }}</p>
+            </ion-item>
+          </ion-list>
+        </div>
+
+        <div *ngSwitchCase="'phd'">
+          <ion-list>
+            <ion-item *ngFor="let program of groupedProgram.get('p')">
+              <h2 *ngIf="program.faculty">Faculty: {{ program.faculty.name }}</h2>
+              <h2 *ngIf="program.program">Program: {{ program.program.name }}</h2>
+              <h3 *ngIf="program.major">Major: {{ program.major }}</h3>
+              <p *ngIf="program.duration">Duration: {{ program.duration }}</p>
+              <p *ngIf="program.cost">Cost: RM{{ program.cost }}</p>
+            </ion-item>
+          </ion-list>
+        </div>
+
+        <div *ngSwitchCase="'foundation'">
+          <ion-list>
+            <ion-item *ngFor="let program of groupedProgram.get('f')">
+              <h2 *ngIf="program.faculty">Faculty: {{ program.faculty.name }}</h2>
+              <h2 *ngIf="program.program">Program: {{ program.program.name }}</h2>
+              <h3 *ngIf="program.major">Major: {{ program.major }}</h3>
+              <p *ngIf="program.duration">Duration: {{ program.duration }}</p>
+              <p *ngIf="program.cost">Cost: RM{{ program.cost }}</p>
+            </ion-item>
+          </ion-list>
+        </div>
+
+        <div *ngSwitchCase="'sijil'">
+          <ion-list>
+            <ion-item *ngFor="let program of groupedProgram.get('s')">
+              <h2 *ngIf="program.faculty">Faculty: {{ program.faculty.name }}</h2>
+              <h2 *ngIf="program.program">Program: {{ program.program.name }}</h2>
+              <h3 *ngIf="program.major">Major: {{ program.major }}</h3>
+              <p *ngIf="program.duration">Duration: {{ program.duration }}</p>
+              <p *ngIf="program.cost">Cost: RM{{ program.cost }}</p>
+            </ion-item>
+          </ion-list>
+        </div>
+
+      </div>
+
+      <!-- <ion-list>
+        <ion-item *ngFor="let program of university.institute_programs">
+          <h2>{{ program.program.name }}</h2>
+          <h3>{{ program.major }}</h3>
+          <p>{{ program.faculty.name }}</p>
+          <p *ngIf="program.duration">Duration: {{ program.duration }}</p>
+          <p *ngIf="program.cost">Cost: {{ program.cost }}</p>
+        </ion-item>
+      </ion-list> -->
+
+    </div>
+
+    <div *ngSwitchCase="'news'">
+
+      <ion-card *ngFor="let news of university.news" >
+
+        <ion-item text-wrap>
+          <h2>{{ news.data.title }}</h2>
+        </ion-item>
+
+        <ion-card-content>
+          {{ news.data.content }}
+        </ion-card-content>
+
+        <ion-row>
+          <ion-col>
+          </ion-col>
+          <ion-col>
+          </ion-col>
+          <ion-col center text-right>
+            <ion-note>
+              {{ news.date }}
+            </ion-note>
+          </ion-col>
+        </ion-row>
+
+      </ion-card>
+
+    </div>
+
+  </div>
+
+
+  <ion-card>
+    <ion-card-content>
+      <div #directionsPanel></div>
+    </ion-card-content>
+  </ion-card>
+
+  <div style="width:100%; height:70%"  #map id="map"></div>
+
+
+</ion-content>

@@ -1,0 +1,31 @@
+page-info {
+  .fab {
+    width: 80px !important;
+    height: 80px !important;
+  }
+  ion-fab[center] {
+    left: 50%;
+    margin-left: -35px;
+  }
+  .content-md {
+  }
+  .card-pink{
+    background-color: color($colors, secondary, base);
+    color: #fff;
+  }
+  .card-pink .card-header-md{
+    color: #ffffff;
+  }
+  .segment{
+    min-height: 100%;
+  }
+  ion-avatar{
+    width: 100px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  h2 span{
+    color: #aaaaaa;
+  }
+}

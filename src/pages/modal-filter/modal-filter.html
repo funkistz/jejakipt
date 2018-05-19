@@ -1,0 +1,86 @@
+<!--
+  Generated template for the ModalFilterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="secondary">
+    <ion-title>Advance Filter</ion-title>
+    <ion-buttons end>
+			<button ion-button icon-only (click)='closeModal()'>
+				<ion-icon name="close"></ion-icon>
+			</button>
+		</ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+<ion-list>
+
+  <ion-item>
+    <ion-label floating>Type</ion-label>
+    <ion-select [(ngModel)]="filterType">
+      <ion-option value="1">IPTA</ion-option>
+      <ion-option value="2">IPTS</ion-option>
+      <ion-option value="3">Community College</ion-option>
+      <ion-option value="4">Polytechnic</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>State</ion-label>
+    <ion-select [(ngModel)]="filterState">
+      <ion-option *ngFor="let state of states" [value]="state.value" text-capitalize>{{ state.name }}</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Program</ion-label>
+    <ion-select [(ngModel)]="filterProgram">
+      <ion-option *ngFor="let program of programs" [value]="program.code" text-capitalize>{{ program.name }}</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Faculty</ion-label>
+    <ion-select [(ngModel)]="filterFaculty">
+      <ion-option *ngFor="let faculty of faculties" [value]="faculty.code" text-capitalize>{{ faculty.name }}</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Educational Level</ion-label>
+    <ion-select [(ngModel)]="filterLevel">
+      <ion-option value="b">Degree</ion-option>
+      <ion-option value="d">Diploma</ion-option>
+      <ion-option value="m">Master</ion-option>
+      <ion-option value="p">PHD</ion-option>
+      <ion-option value="f">Foundation</ion-option>
+      <ion-option value="s">Sijil</ion-option>
+    </ion-select>
+  </ion-item>
+
+</ion-list>
+
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6>
+          <button ion-button full (click)="closeModal()">Filter</button>
+        </ion-col>
+        <ion-col col-6>
+          <button ion-button full (click)="reset()" color="light">Reset</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>
+
+</ion-content>

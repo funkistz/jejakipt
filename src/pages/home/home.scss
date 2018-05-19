@@ -1,3 +1,39 @@
 page-home {
+  .state-thumb img{
+    height: 20px;
+    width: 40px;
+  }
+  .state-thumb{
+    height: 20px !important;
+    width: 40px;
+    float: left;
+    margin-right: 20px;
+  }
+  .card-md{
+    border-radius: 10px;
+  }
+  .content-md {
+    background-color: color($colors, secondary, base);
+  }
 
+  .app-title{
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+
+  ion-slide {
+    align-items: flex-start !important;
+  }
+
+  .slide-scroll {
+    overflow-x: scroll;
+  }
+
+  ion-thumbnail {
+    width: 90px;
+    margin: auto;
+    margin-top: 15px;
+    border-radius: 50px;
+    overflow: hidden;
+  }
 }

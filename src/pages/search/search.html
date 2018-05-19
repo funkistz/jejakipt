@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar color='primary'>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+		<ion-searchbar #searchbar (change)="searchFilter($event)"></ion-searchbar>
+		<ion-buttons end>
+			<button ion-button icon-only (click)='openFilter()'>
+				<ion-icon name="ios-funnel"></ion-icon>
+			</button>
+		</ion-buttons>
+	</ion-toolbar>
+  <ion-item>
+    <ion-range max="10000" min="0" step="500" color="secondary" snaps="true" [(ngModel)]="filterRange" (ionChange)="rangeFilter($event)">
+      <ion-label range-left>0KM</ion-label>
+      <ion-label range-right>10,000KM</ion-label>
+    </ion-range>
+  </ion-item>
+</ion-header>
+
+<ion-content>
+
+<agm-map
+[latitude]="lat | latLang"
+[longitude]="lng | latLang"
+[zoom]="zoom"
+(click)="mapFocus()"
+>
+  <agm-marker
+      *ngFor="let university of universityArray"
+      [iconUrl]="university.type | markerIcon"
+      [latitude]="university.lat | latLang"
+      [longitude]="university.lng | latLang">
+
+      <agm-info-window>
+        <ul>
+          <li>Name: {{ university.name }}</li>
+          <li>State: {{ university.state_name }}</li>
+          <li>Lat: {{ university.lat | latLang }}</li>
+          <li>Long: {{ university.lng | latLang }}</li>
+        </ul>
+        <button ion-button text-capitalize (click)="universityInfo(university)">
+          Info
+        </button>
+      </agm-info-window>
+  </agm-marker>
+  <agm-circle
+      [latitude]="lat"
+      [longitude]="lng"
+      [radius]="filterRange | latLang"
+      [fillColor]="'red'"
+      [circleDraggable]="false"
+      [editable]="false">
+  </agm-circle>
+</agm-map>
+
+</ion-content>
+
+<ion-pullup (onExpand)="footerExpanded()" (onCollapse)="footerCollapsed()" [(state)]="footerState" [maxHeight]="400">
+  <ion-pullup-tab [footer]="pullup" (tap)="toggleFooter()">
+  </ion-pullup-tab>
+  <ion-toolbar (tap)="toggleFooter()">
+    <ion-title text-center>{{ footer_label }} <span *ngIf="footer_label != 'Loading...' && filterRange > 0">within {{ filterRange }}km</span></ion-title>
+  </ion-toolbar>
+  <ion-content>
+    <ion-list>
+        <button ion-item *ngFor="let university of universityArray" text-capitalize (click)="universityInfo(university)">
+          {{ university.name }}
+          <ion-icon name="arrow-forward" item-end></ion-icon>
+        </button>
+    </ion-list>
+  </ion-content>
+</ion-pullup>

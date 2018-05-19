@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      News
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+
+  <ion-refresher (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card *ngFor="let new of news">
+
+    <ion-item text-wrap>
+      <h2>{{ new.data.title }}</h2>
+      <p>by {{ new.institute.name }}</p>
+    </ion-item>
+
+    <ion-card-content>
+      {{ new.data.content }}
+    </ion-card-content>
+
+    <ion-row>
+      <ion-col>
+      </ion-col>
+      <ion-col>
+      </ion-col>
+      <ion-col center text-right>
+        <ion-note>
+          {{ new.date }}
+        </ion-note>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+
+
+</ion-content>

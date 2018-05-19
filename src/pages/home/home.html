@@ -1,14 +1,94 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>
-      Ionic Blank
+      Jejak IPT
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content>
+
+  <ion-slides pager>
+
+    <ion-slide>
+
+      <ion-thumbnail>
+          <img src="assets/logo_circle.PNG" >
+      </ion-thumbnail>
+
+      <h4 style="color: white;" class="app-title">Aplikasi Maklumat IPT Bersepadu</h4>
+
+      <ion-card>
+
+        <ion-card-header>
+          Numbers of IPT based on Category
+        </ion-card-header>
+        <ion-card-content>
+          <canvas #doughnutCanvas style="height: 250px"></canvas>
+        </ion-card-content>
+
+      </ion-card>
+    </ion-slide>
+
+    <ion-slide class="slide-scroll">
+
+      <h4 style="color: white;" class="app-title">Numbers of IPT based on State</h4>
+
+      <ion-card>
+
+        <ion-card-content>
+
+          <ion-list>
+            <button ion-item *ngFor="let state of instituteStates" text-capitalize>
+                <img [src]="getStateImage(state.state_name)" class="state-thumb">
+              {{ state.state_name }}
+              <ion-badge item-end>{{ state.total }}</ion-badge>
+            </button>
+          </ion-list>
+        </ion-card-content>
+
+      </ion-card>
+    </ion-slide>
+
+    <ion-slide class="slide-scroll" style="background-color: white;">
+
+      <h4 class="app-title">QS WORLD UNIVERSITY RANKING 2018</h4>
+
+      <ion-card *ngFor="let institute of instituteRankingWorld">
+
+        <ion-item>
+          <ion-avatar item-start>
+            <img [src]="getInstituteImage(institute.image)">
+          </ion-avatar>
+          <h2 text-wrap>{{ institute.name }}</h2>
+          <button ion-fab item-end color="orange">{{ institute.ranking_world }}</button>
+        </ion-item>
+
+      </ion-card>
+
+    </ion-slide>
+
+    <ion-slide class="slide-scroll" style="background-color: white;">
+
+      <h4 class="app-title">QS ASIA UNIVERSITY RANKING 2018</h4>
+
+      <ion-card *ngFor="let institute of instituteRankingAsia">
+
+        <ion-item>
+          <ion-avatar item-start>
+            <img [src]="getInstituteImage(institute.image)">
+          </ion-avatar>
+          <h2 text-wrap>{{ institute.name }}</h2>
+          <button ion-fab item-end color="blue">{{ institute.ranking_asia }}</button>
+        </ion-item>
+
+      </ion-card>
+
+    </ion-slide>
+
+  </ion-slides>
+
 </ion-content>
